@@ -6,7 +6,11 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 
-@dataclass #if you are only defining varaibles then we can use this decorator insted of using init
+from src.components.data_transformation import DataTransformation
+from src.components.data_transformation import DataTransformationConfig
+from src.components.model_trainer import ModelTrainer
+
+@dataclass #if you are only defining varaibles then we can use this decorator instead of using init
 class DataIngestionConfig:
     '''This function helps in giving a customized input to the dataingestion 
      component where we can specify details like where can i store the train,test,raw data etc'''
@@ -46,8 +50,12 @@ class DataIngestion:
 
 if __name__ == "__main__":#if __name__ == "__main__": in Python is used to ensure that certain code is only executed when the script is run directly, and not when it is imported as a module in another scrip
     obj = DataIngestion()
-    obj.initiate_data_ingestion() # python -m src.components.data_ingestion -- use this code to execute
+    train_data,test_data=obj.initiate_data_ingestion() # python -m src.components.data_ingestion -- use this code to execute
 
+    data_transformation = DataTransformation()
+    train_arr,test_arr,_= data_transformation.initiate_data_transformation(train_data,test_data)
 
+    modelTrainer = ModelTrainer()
+    print(modelTrainer.initiate_model_trainer(train_arr,test_arr))
 
 
