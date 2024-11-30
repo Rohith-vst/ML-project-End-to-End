@@ -13,8 +13,7 @@ logging.basicConfig(filename = LOG_FILE_PATH,
                    level = logging.INFO,
 )
 
-""" 
-Test code 
+
+
 if __name__ == "__main__":
     logging.info("Logging has started")
-"""
